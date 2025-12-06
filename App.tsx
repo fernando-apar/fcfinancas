@@ -128,12 +128,6 @@ function App() {
             })}
             </nav>
         </div>
-        
-        <div className="mt-auto p-6 m-4 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl text-white relative overflow-hidden shadow-xl">
-             <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500 blur-[40px] opacity-30"></div>
-             <p className="relative z-10 text-sm font-medium opacity-80">Versão Pro</p>
-             <p className="relative z-10 text-xs opacity-50 mt-1">Sincronização ativada</p>
-        </div>
       </aside>
 
       {/* --- MAIN CONTENT --- */}
@@ -152,32 +146,34 @@ function App() {
         </div>
 
         {/* Scrollable Area */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-8 pb-24 md:pb-8">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-8 pb-32 md:pb-8">
             <div className="max-w-7xl mx-auto w-full">
                 {renderContent()}
             </div>
         </div>
 
         {/* --- MOBILE BOTTOM NAVIGATION --- */}
-        <div className="md:hidden fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl shadow-slate-300/50 rounded-2xl z-50 flex justify-between px-2 py-2">
-             {navItems.slice(0, 5).map(item => { // Show first 5 items on mobile bar
-                 const isActive = activeTab === item.id;
-                 return (
-                     <button
-                        key={item.id}
-                        onClick={() => setActiveTab(item.id)}
-                        className={`flex flex-col items-center justify-center p-2 rounded-xl w-full transition-all duration-300 ${
-                            isActive ? 'text-violet-600 bg-violet-50' : 'text-gray-400 hover:text-gray-600'
-                        }`}
-                     >
-                         <item.icon size={22} className={isActive ? 'fill-current' : ''} strokeWidth={isActive ? 2.5 : 2} />
-                         <span className={`text-[10px] font-medium mt-1 transition-all ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 hidden'}`}>
-                             {item.label}
-                         </span>
-                     </button>
-                 )
-             })}
-             {/* More Button (if needed, simplified here to show max 5) */}
+        {/* Changed to allow scrolling for better responsiveness with many items */}
+        <div className="md:hidden fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl shadow-slate-300/50 rounded-2xl z-50">
+             <div className="flex justify-between items-center px-2 py-2 overflow-x-auto no-scrollbar gap-1">
+                {navItems.map(item => {
+                    const isActive = activeTab === item.id;
+                    return (
+                        <button
+                            key={item.id}
+                            onClick={() => setActiveTab(item.id)}
+                            className={`flex flex-col items-center justify-center min-w-[64px] p-2 rounded-xl transition-all duration-300 ${
+                                isActive ? 'text-violet-600 bg-violet-50' : 'text-gray-400 hover:text-gray-600'
+                            }`}
+                        >
+                            <item.icon size={22} className={isActive ? 'fill-current' : ''} strokeWidth={isActive ? 2.5 : 2} />
+                            <span className={`text-[10px] font-medium mt-1 whitespace-nowrap transition-all ${isActive ? 'opacity-100' : 'opacity-0 hidden'}`}>
+                                {item.label}
+                            </span>
+                        </button>
+                    )
+                })}
+             </div>
         </div>
       </main>
     </div>

@@ -47,41 +47,20 @@ export const Dashboard: React.FC<DashboardProps> = ({ data, onUpdateBill }) => {
 
   return (
     <div className="space-y-8 animate-fade-in pb-10">
-      <header className="flex justify-between items-end">
+      <header className="flex flex-col md:flex-row md:justify-between md:items-end gap-2">
         <div>
            <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-1">Visão Geral</h2>
-           <h1 className="text-3xl font-bold text-slate-800">Olá, Bem-vindo de volta! 👋</h1>
+           <h1 className="text-2xl md:text-3xl font-bold text-slate-800">Olá, Bem-vindo de volta! 👋</h1>
         </div>
         <div className="hidden md:block text-sm text-slate-500 bg-white px-3 py-1 rounded-full border shadow-sm">
             {new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
         </div>
       </header>
 
-      {/* Main KPIs Row - Completely Separated */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Main KPIs Row - 2 Columns (Stacked on mobile) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         
-        {/* 1. Main Balance Card */}
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-violet-600 via-indigo-600 to-blue-600 text-white p-6 shadow-2xl shadow-indigo-500/30 hover:scale-[1.02] transition-transform duration-300 group">
-             <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 rounded-full bg-white opacity-10 blur-3xl group-hover:opacity-20 transition-opacity"></div>
-             <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 rounded-full bg-blue-400 opacity-20 blur-2xl"></div>
-             
-             <div className="relative z-10 flex flex-col h-full justify-between min-h-[160px]">
-                <div className="flex justify-between items-start">
-                    <div className="bg-white/20 p-2.5 rounded-xl backdrop-blur-md">
-                        <Wallet className="text-white" size={24} />
-                    </div>
-                    <span className="bg-emerald-400/20 text-emerald-300 text-xs px-2 py-1 rounded-full border border-emerald-400/20 font-medium">
-                        Ativo
-                    </span>
-                </div>
-                <div>
-                    <p className="text-indigo-100 text-sm font-medium mb-1">Saldo Total Disponível</p>
-                    <h2 className="text-4xl font-bold tracking-tight">R$ {summary.balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</h2>
-                </div>
-             </div>
-        </div>
-
-        {/* 2. Income Card */}
+        {/* Income Card */}
         <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/10 transition-all hover:-translate-y-1 relative overflow-hidden group">
              <div className="absolute right-0 top-0 w-32 h-32 bg-emerald-50 rounded-bl-[4rem] -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
              <div className="relative z-10">
@@ -99,7 +78,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ data, onUpdateBill }) => {
              </div>
         </div>
 
-        {/* 3. Expense Card */}
+        {/* Expense Card */}
         <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-xl hover:shadow-rose-500/10 transition-all hover:-translate-y-1 relative overflow-hidden group">
              <div className="absolute right-0 top-0 w-32 h-32 bg-rose-50 rounded-bl-[4rem] -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
              <div className="relative z-10">
@@ -119,7 +98,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ data, onUpdateBill }) => {
       </div>
 
       {/* Secondary Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
          <div className="bg-white p-5 rounded-[1.5rem] shadow-sm border border-slate-100 flex items-center gap-4 hover-card cursor-pointer group">
             <div className="bg-orange-50 p-3.5 rounded-2xl text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 <CreditCard size={24} />
